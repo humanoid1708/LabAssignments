@@ -1,5 +1,7 @@
 #include <iostream>
 #include <queue>
+#include <stack>
+#include <queue>
 using namespace std;
 
 class gnode {
@@ -12,7 +14,6 @@ class gnode {
 class graph {
     int n;
     gnode *head[20];
-    
     public:
         graph() {
             cout<<"Enter the number of users: ";
@@ -66,21 +67,78 @@ class graph {
             }
         }
 
-        /*void BFS(int v) {
-            int visited[n];
-            for (int i = 0; i < n; i++) {
+        
+        int visited[20];
+        void DFSrec() {
+            for(int i = 0; i < n; i++) {
                 visited[i] = 0;
             }
+            int search;
+            cout<<"Enter the id for searching:";
+            cin>>search;
+            DFS(search);
+        }
+
+        void DFS(int v) {
+            cout<<head[v]->id<<" "<<head[v]->name<<endl;
+            visited[v] = 1;
+            gnode *temp = head[v];
+            while(temp != NULL) {
+                temp = temp->next;
+                if(!visited[temp->id]) {
+                    DFS(temp->id);
+                }
+            }
+        }
+
+        void DFSnonrec(int v) {
+            stack<int> s;
+            for(int i = 0; i < n; i++) {
+                visited[i] = 0;
+            }
+            s.push(v);
+            visited[v]= 1;
+            do {
+                v = s.top();
+                s.pop();
+                cout<<head[v]->id<<" "<<head[v]->name<<endl;
+                gnode *temp = head[v];
+                while(temp != NULL) {
+                    if(!visited[temp->id]) {
+                        s.push(temp->id);
+                        visited[temp->id] = 1;
+                    }
+                    temp = temp->next;
+                }
+            }while(!s.empty());
+        }
+
+        void BFS(int v) {
             queue<int> q;
+            for(int i = 0; i < n; i++) {
+                visited[i] = 0;
+            }
             q.push(v);
             while(!q.empty()) {
+                v = q.front();
+                q.pop();
+                cout<<head[v]->id<<" "<<head[v]->name<<endl;
+                gnode *temp = head[v];
+                while(temp != NULL) {
+                    if(!visited[temp->id]) {
+                        q.push(temp->id);
+                        visited[temp->id] = 1;
+                    }
+                    temp = temp->next;
+                }
             }
-        }*/
-
+        }
 };
 
 int main() {
     graph friends;
     friends.create();
     friends.display();
+    friends.BFS(0);
+
 }
