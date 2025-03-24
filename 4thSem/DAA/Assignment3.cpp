@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+const int inf = 1e10;
 
 class Matrix {
     public:
@@ -44,7 +45,24 @@ class Matrix {
       };
 
 class Prim {
+    public:
+        Matrix graph;
+        vector<vector<int>> adjmat = graph.Adj();
 
+        int Prims(int start) {
+            int n = graph.vertex;
+            int cost[n][2];
+            for(int i = 0; i < n; i++) {
+                if(i == start) {
+                    cost[i][0] = -1;
+                    cost[i][1] = 1; 
+                }
+                else{
+                    cost[i][0] = inf;
+                    cost[i][1] = 0;
+                }
+            }
+        }
 };
 
 

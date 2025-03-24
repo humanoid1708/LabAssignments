@@ -119,6 +119,7 @@ class graph {
                 visited[i] = 0;
             }
             q.push(v);
+            visited[v] = 1;
             while(!q.empty()) {
                 v = q.front();
                 q.pop();
