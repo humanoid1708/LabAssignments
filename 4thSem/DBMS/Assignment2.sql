@@ -1,6 +1,6 @@
-create database transport;
+create database lab2;
 
-use transport;
+use lab2;
 
 create table suppliers (
     Sno int primary key,
@@ -12,7 +12,7 @@ create table suppliers (
 create table parts (
     Pno int primary key,
     Pname varchar(25) not null,
-    Color varchar(25)
+    Color varchar(25),
     Weight varchar(15) not null,
     City varchar(30)
 );
@@ -28,8 +28,8 @@ create table shipments (
     Pno int unique,
     Jno int unique,
     qty int not null,
-    foreign key (Sno) references suppliers(Sno)
-    foreign key (Pno) references parts(Pno)
+    foreign key (Sno) references suppliers(Sno),
+    foreign key (Pno) references parts(Pno),
     foreign key (Jno) references projects(Jno)
 );
 
